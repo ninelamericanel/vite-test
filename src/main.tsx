@@ -1,7 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { createGlobalStyle } from 'styled-components'
-import App from './App.tsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createGlobalStyle } from "styled-components";
+import App from "./components/App/index.tsx";
 
 const Global = createGlobalStyle`
   * {
@@ -18,11 +18,11 @@ const Global = createGlobalStyle`
   body {
     overflow-y: hidden;
   }
-`
+`;
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Global />
     <App />
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);
