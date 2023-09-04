@@ -1,3 +1,4 @@
+import { forwardRef } from "react"
 import { styled } from "styled-components"
 import { ITodo } from "../../App"
 import { truncString } from "../../utils/truncString"
@@ -22,15 +23,6 @@ const TaskBlockStyled = styled.div`
   color: black;
 `
 
-const TaskBlockOutStyled = styled.li`
-display: flex;
-align-items: center;
-width: 265px;
-// background-color: #F4F8FF;
-background-color: black;
-border-radius: 7px;
-`
-
 const StyledDates = styled.div`
   display: flex;
   justify-content: space-between;
@@ -43,9 +35,10 @@ const StyledTags = styled.div`
 
 const StyledTag = styled.p<{i: number}>`
   background-color: ${props => props.i === 0 ? '#B233A6' : '#EBEEF6'};
+  padding: 2px 6px;
+    font-size: 12px;
   border-radius: 4px;
-   padding: 2px 6px;
-   `
+`
 
 const StyledDate = styled.p`
   color: #50B810;
@@ -66,17 +59,27 @@ const StyledTitle = styled.h3`
   color: #3D8FEC;
 `
 
+const TaskBlockOutStyled = styled.li`
+display: flex;
+align-items: center;
+padding: 4px;
+/* width: 265px; */
+background-color: #F4F8FF;
+border-radius: 7px;
+`
+
+
 const CheckboxStyled = styled.input`
   float: left;
 `
 interface IProps { todo: ITodo}
+type Ref = HTMLLIElement;
 
-function Todo(props: IProps) {
+const Todo = forwardRef<Ref, IProps>((props, ref) => {
     const { todo } = props;
     const { startDate, endDate } = getFakeDate();
 
-    return (
-        <TaskBlockOutStyled key={todo.id}>
+    const todoBody = (
         <TaskBlockStyled>
           <StyledHeader>
             <CheckboxStyled type='checkbox' checked={todo.completed}/>
@@ -93,8 +96,14 @@ function Todo(props: IProps) {
             })}
           </StyledTags>
         </TaskBlockStyled>
-      </TaskBlockOutStyled>
     )
-  }
+
+    const contetn = ref ? (<TaskBlockOutStyled ref={ref}>
+    {todoBody}
+     </TaskBlockOutStyled>) : <TaskBlockOutStyled>
+    {todoBody}
+     </TaskBlockOutStyled>
+    return contetn;
+  })
   
 export default Todo
