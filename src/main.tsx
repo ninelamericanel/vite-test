@@ -14,6 +14,10 @@ const Global = createGlobalStyle`
   li {
     list-style: none;
   }
+
+  body {
+    overflow-y: hidden;
+  }
 `
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
