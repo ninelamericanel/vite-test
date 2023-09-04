@@ -1,5 +1,5 @@
 import { StyledRectangle, StyledTag, StyledTagWithRectangle } from "./styles";
-import rectangle from "../../assets/Rectangle.svg";
+import rectangle from "/src/assets/rectangle.svg";
 
 interface IProps {
   index: number;
