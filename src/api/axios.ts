@@ -7,7 +7,7 @@ export const api = axios.create({
 type Signal = object | undefined;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getDataForPage = async (pageParam = 1, signal?: Signal) => {
+export const getDataForPage = async (pageParam = 1, _signal?: Signal) => {
   const res = await api.get(`/todos?_page=${pageParam}`);
   return res.data;
 };
