@@ -4,6 +4,8 @@ import { ITodo } from "../../App"
 import { truncString } from "../../utils/truncString"
 import { getFakeLorem } from "../../utils/getFakeLorem"
 import { getFakeDate } from "../../utils/getFakeDate"
+import { toUpperCaseFirst } from '../../utils/toUpperCaseFirst'
+import Tag from '../Tag/'
 
 const StyledHeader = styled.div`
 /* display: flex; */
@@ -32,19 +34,11 @@ const StyledTags = styled.div`
   display: flex;
   column-gap: 4px;
 `
-
-const StyledTag = styled.p<{i: number}>`
-  background-color: ${props => props.i === 0 ? '#B233A6' : '#EBEEF6'};
-  padding: 2px 6px;
-    font-size: 12px;
-  border-radius: 4px;
-`
-
 const StyledDate = styled.p`
   color: #50B810;
   font-size: 13px;
   line-height: 140%;
-  font-weight: 600;
+  font-weight: 500;
 `
 
 const DescriptionStyle = styled.p`
@@ -56,6 +50,7 @@ const DescriptionStyle = styled.p`
 const StyledTitle = styled.h3`
   font-size: 14px;
   line-height: 130%;
+  font-weight: 500;
   color: #3D8FEC;
 `
 
@@ -68,10 +63,25 @@ background-color: #F4F8FF;
 border-radius: 7px;
 `
 
-
 const CheckboxStyled = styled.input`
   float: left;
 `
+
+const StyledAvatar = styled.div`
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+
+    background-color: red;
+`
+
+const StyledFooter = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`
+
+
 interface IProps { todo: ITodo}
 type Ref = HTMLLIElement;
 
@@ -83,18 +93,19 @@ const Todo = forwardRef<Ref, IProps>((props, ref) => {
         <TaskBlockStyled>
           <StyledHeader>
             <CheckboxStyled type='checkbox' checked={todo.completed}/>
-            <StyledTitle>{truncString(todo.title, 60)}</StyledTitle>
+            <StyledTitle>{toUpperCaseFirst(truncString(todo.title, 60))}</StyledTitle>
           </StyledHeader>
-          <DescriptionStyle>{truncString(getFakeLorem(2, 30), 30)}</DescriptionStyle>
+          <DescriptionStyle>{toUpperCaseFirst(truncString(getFakeLorem(2, 30), 30))}</DescriptionStyle>
           <StyledDates>
             <StyledDate>{startDate}</StyledDate>
             <StyledDate>{endDate}</StyledDate>
           </StyledDates>
+          <StyledFooter>
           <StyledTags>
-            {getFakeLorem(2, 2).split(' ').map((item, i) => {
-              return <StyledTag i={i}>{item}</StyledTag>
-            })}
+            {getFakeLorem(2, 2).split(' ').map((item, i) => <Tag index={i} title={toUpperCaseFirst(item)}/>)}
           </StyledTags>
+          <StyledAvatar />
+          </StyledFooter>
         </TaskBlockStyled>
     )
 
