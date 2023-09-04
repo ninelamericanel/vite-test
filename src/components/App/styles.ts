@@ -67,4 +67,5 @@ export const StyledButton = styled.button`
 
 export const StyledMessage = styled.h3`
   text-align: center;
+  margin: auto;
 `;
